@@ -27,6 +27,10 @@ public class UserService {
 		return listUser.stream().map(user -> new UserDTO(user)).collect(Collectors.toList());
 	}
 	
+//	public UserDTO save(UserDTO user) {
+//		userRepository.save(entity);
+//	}
+	
 	public void delete(Long id) {
 		try {
 			userRepository.deleteById(id);

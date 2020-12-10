@@ -26,13 +26,14 @@ public class UserController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<UserDTO>> listar(){
+	public ResponseEntity<List<UserDTO>> listAll(){
 		return ResponseEntity.ok().body(userService.findAll());
 
 	}
-	
+
+
 	@DeleteMapping("/{userId}")
-	public ResponseEntity<UserDTO> deletar(@PathVariable(value="userId") Long userId) {
+	public ResponseEntity<UserDTO> deleteById(@PathVariable(value="userId") Long userId) {
 		try {
 			
 			userService.delete(userId);
