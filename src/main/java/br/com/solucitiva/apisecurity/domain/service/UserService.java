@@ -21,8 +21,8 @@ public class UserService {
 	
 	public List<User> findAll(){
 		List<User> listUser= userRepository.findAll();
-		return null;
-//		return listUser.stream().map(user -> new UserDTO(user)).collect(Collectors.toList());
+		return listUser;
+
 	}
 
 	public Optional<User> findById(Long userId){
