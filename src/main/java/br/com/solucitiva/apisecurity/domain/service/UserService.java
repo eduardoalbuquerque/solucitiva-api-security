@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +15,14 @@ import br.com.solucitiva.apisecurity.domain.exception.EntidadeNaoEncontradaExcep
 import br.com.solucitiva.apisecurity.domain.model.User;
 import br.com.solucitiva.apisecurity.domain.repository.UserRepository;
 
-@AllArgsConstructor
+//@AllArgsConstructor(onConstructor = @__(@Autowired))
+@NoArgsConstructor
 @Service
 public class UserService {
 
+	@Autowired
 	private  UserRepository userRepository;
-	
+
 	public List<User> findAll(){
 		List<User> listUser= userRepository.findAll();
 		return listUser;
