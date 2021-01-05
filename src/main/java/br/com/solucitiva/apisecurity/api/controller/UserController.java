@@ -8,6 +8,8 @@ import br.com.solucitiva.apisecurity.api.controller.disassembler.UserDisassemble
 import br.com.solucitiva.apisecurity.api.controller.model.input.UserModelInput;
 import br.com.solucitiva.apisecurity.api.controller.model.output.UserModelOutput;
 import br.com.solucitiva.apisecurity.domain.model.User;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,8 @@ import br.com.solucitiva.apisecurity.domain.service.UserService;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/v1/users")
+@Api(value = "API REST User")
+@CrossOrigin(origins = "*")
 public class UserController {
 
 	private UserService userService;
@@ -30,6 +34,7 @@ public class UserController {
 
 
 	@GetMapping
+	@ApiOperation(value = "Return list of users")
 	public ResponseEntity<List<UserModelOutput>> listAll(){
 		List<UserModelOutput> listOutput = userAssembler.toListModelOutput(userService.findAll());
 		return ResponseEntity.ok(listOutput);
@@ -37,6 +42,7 @@ public class UserController {
 
 
 	@GetMapping("/{userId}")
+	@ApiOperation(value = "Return a users by ID")
 	public ResponseEntity<UserModelOutput> findById(@PathVariable Long userId){
 
 		Optional<User> userOptional= userService.findById(userId);
@@ -50,6 +56,7 @@ public class UserController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
+	@ApiOperation(value = "Create a User and return the user created")
 	public ResponseEntity<UserModelOutput> save(@RequestBody UserModelInput userModelInput){
 		try {
 			User userToSave = userService.save(userDisassembler.toModelInput(userModelInput));
@@ -61,6 +68,7 @@ public class UserController {
 
 
 	@DeleteMapping("/{userId}")
+	@ApiOperation(value = "Delete a User and return a user created or a error message")
 	public ResponseEntity<?> deleteById(@PathVariable Long userId) {
 
 		try {
